@@ -1,6 +1,6 @@
 /* eslint-disable */
 require('babel-polyfill');
-require('./config/environment');
+const config = require('./config/environment');
 const webpackAssets = require('../compiled/webpack-assets.json');
 const mapWebpackAssets = require('./server/utils/mapWebpackAssets');
 

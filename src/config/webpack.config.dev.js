@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 
-require('./environment');
+const config = require('./environment');
 const { SRC } = require('./paths');
 const defaultConfig = require('./webpack.common');
 
 const devConfig = Object.assign({}, defaultConfig, {
   entry: {
-    app: [`${SRC}/styles/app.scss`, `${SRC}/client-entry.js`],
+    app: [`webpack-dev-server/client?path=/__KOA_UPDATE`, `${SRC}/styles/app.scss`, `${SRC}/client-entry.js`],
     'promise-polyfill': [`${SRC}/promise-polyfill.js`]
   }
 });
