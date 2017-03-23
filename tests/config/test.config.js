@@ -3,13 +3,16 @@ require('babel-core/register')({
 });
 require("babel-polyfill");
 const jsdom = require('jsdom');
+const hook = require('node-hook').hook;
+hook('.scss', (source, filename) => '');
+hook('.svg', (source, filename) => '');
 
-require('../../src/config/environment')
 // setup the simplest document possible
 const doc = jsdom.jsdom(`
 <!doctype html>
   <html> <body> <div id="html"></div> </body>
 </html>`);
+
 
 // get the window object out of the document and set globals for mocha
 const win = doc.defaultView;
@@ -28,11 +31,9 @@ function propagateToGlobal(window) {
 }
 
 const chai = require('chai');
-const chaiEnzyme = require('chai-enzyme');
 const sinonChai = require("sinon-chai");
 
 // setup chai
 chai.should();
 chai.expect();
-chai.use(chaiEnzyme());
 chai.use(sinonChai);

@@ -5,24 +5,37 @@ import './styles.scss';
 
 export default class Homepage extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.fetch = this.fetch.bind(this);
+    this.state = {
+
+    };
   }
 
-  fetch(e){
-    e.preventDefault()
-    json.get(this.apiInput.value);
+  fetch(e) {
+    e.preventDefault();
+    json.get(`/api/v1${this.apiInput.value}&responseType=${this.responseType.value}`)
+      .then((response) => {
+        const formatted = this.responseType.value === 'json'
+          ? JSON.stringify(JSON.parse(response), null, 2)
+          : response;
+        this.setState({ response: formatted });
+      });
   }
 
-  render() {
+  render({}, { response }) {
     return (
       <div id="homepage" className="section-container">
         <banner className="header">
           <h1>Advertiser List</h1>
         </banner>
         <form action="/" method="get" className="form" >
-          <select className="form_select form_select--primary">
+          <select className="form_select form_select--primary"
+                  ref={(input) => {
+                    this.responseType = input;
+                  }}
+          >
             <option className="form_option">json</option>
             <option className="form_option">xml</option>
           </select>
@@ -51,9 +64,12 @@ export default class Homepage extends Component {
             <dt className="section__label">Allow:</dt><dd className="section__value"></dd>
             <dt className="section__label">Content-type:</dt><dd className="section__value"></dd>
             <dt className="section__label sr-only">Response</dt>
-            <dd className="results__value">
-
-            </dd>
+            {response ? (
+              <dd className="results__value">
+                {response}
+              </dd>)
+              : null
+            }
           </dl>
         </section>
       </div>

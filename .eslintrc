@@ -20,6 +20,10 @@
     "arrow-parens": ["error", "always"],
     "class-methods-use-this": 0,
     "comma-dangle": 0,
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["ctx"]
+    }],
     "no-unused-vars": ["error", {"varsIgnorePattern": "^(log|h)$"}],
     "id-length": [2, {"exceptions": ["e", "i"]}]
   }

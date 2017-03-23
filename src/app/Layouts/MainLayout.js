@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 
-import "./mainLayout.scss";
+import './mainLayout.scss';
 
 export default class MainLayout extends Component {
 

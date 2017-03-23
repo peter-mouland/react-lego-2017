@@ -1,4 +1,3 @@
-import { findRoute } from '../../src/app/routes';
 let homePage;
 let pageLayout;
 
@@ -7,18 +6,18 @@ module.exports = {
   before(browser) {
     homePage = browser.page.homepage();
     pageLayout = browser.page.layout();
-    browser.pageLoaded(findRoute('homepage').path, { selector : '#homepage' });
+    browser.pageLoaded('/', { selector : '#homepage' });
   },
 
-  ['homepage layout should include nav, footer and content blocks'](browser) {
-    browser.expect.element('.layout.layout--main').to.be.present;
-    browser.expect.element('.layout__nav').to.be.present;
+  ['homepage layout should include  content blocks'](browser) {
+    browser.expect.element('.layout__main').to.be.present;
     browser.expect.element('.layout__content').to.be.present;
-    browser.expect.element('.layout__footer').to.be.present;
   },
 
-  ['homepage can navigate to the game page'](browser) {
-    browser.safeClick('[href="/game/"]');
-    browser.expect.element('#game').to.be.present;
-  }
+  ['user can request content'](browser) {
+    browser.safeClick('.form__button');
+    browser.waitForElementPresent('.results__value', 1000);
+
+    browser.expect.element('.results__value').to.be.present;
+  },
 };
