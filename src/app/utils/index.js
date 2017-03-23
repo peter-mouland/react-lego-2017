@@ -1,5 +1,4 @@
 export { fetch, json } from './fetch';
-export { randomRange } from './randomRange';
 
 const navigator = global.navigator && global.navigator.userAgent;
 // hasWindow = true for tests + client
@@ -17,7 +16,7 @@ const getLocalUrl = () => {
     }
     return location.origin;
   }
-  return `http://localhost:${process.env.PORT}`;
+  return `http://localhost:${process.env.PORT || 8080}`;
 };
 
 export const localUrl = getLocalUrl();

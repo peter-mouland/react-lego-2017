@@ -1,6 +1,4 @@
 /* eslint-disable no-console, import/no-extraneous-dependencies */
-const config = require('./config/environment');
-
 const path = require('path');
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
@@ -18,6 +16,6 @@ const server = new WebpackDevServer(compiler, {
   }
 });
 
-server.listen(config.PORT, '127.0.0.1', () => {
-  console.log(`Starting server on http://localhost:${config.PORT}`);
+server.listen(process.env.PORT || 8080, '127.0.0.1', () => {
+  console.log(`Starting server on http://localhost:${process.env.PORT || 8080}`);
 });

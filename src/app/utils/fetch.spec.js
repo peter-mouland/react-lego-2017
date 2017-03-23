@@ -1,5 +1,4 @@
 import { expect, sinon } from '../../../tests/config/test.helper';
-import config from '../../config/environment';
 
 import Chance from 'chance';
 import proxyquire from 'proxyquire';
@@ -35,7 +34,7 @@ describe('fetch', ()=>{
       const endpoint = '/' + chance.word();
       fetch.url(endpoint).then(() => {
         expect(axiosStubArguments).to.deep.equal({
-          url: `http://localhost:${config.PORT}${endpoint}`
+          url: `http://localhost:${process.env.PORT || 8080}${endpoint}`
         });
         done();
       }).catch((e) => {

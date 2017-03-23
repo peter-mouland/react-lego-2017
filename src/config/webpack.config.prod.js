@@ -1,4 +1,3 @@
-require('./environment');
 const { SRC } = require('./paths');
 const defaultConfig = require('./webpack.common');
 
