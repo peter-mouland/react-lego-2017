@@ -29,6 +29,7 @@
     "npm": "^4.1.0"
   },
   "pre-commit": [
+    "test"
   ],
   "pre-push": [
     "build",
