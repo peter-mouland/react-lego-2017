@@ -9,7 +9,7 @@ export default class Homepage extends Component {
     super(props);
     this.fetch = this.fetch.bind(this);
     this.state = {
-
+      response: false
     };
   }
 

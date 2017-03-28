@@ -15,6 +15,7 @@ module.exports = {
   },
 
   ['user can request content'](browser) {
+    browser.expect.element('.results__value').not.to.be.present;
     browser.safeClick('.form__button');
     browser.waitForElementPresent('.results__value', 1000);
 

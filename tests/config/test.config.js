@@ -18,6 +18,7 @@ const doc = jsdom.jsdom(`
 const win = doc.defaultView;
 global.document = doc;
 global.window = win;
+global.Text = win.Text;
 
 // take all properties of the window object and also attach it to the mocha global object
 // from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
@@ -32,8 +33,10 @@ function propagateToGlobal(window) {
 
 const chai = require('chai');
 const sinonChai = require("sinon-chai");
+const assertJsx = require('preact-jsx-chai');
 
 // setup chai
 chai.should();
 chai.expect();
 chai.use(sinonChai);
+// chai.use(assertJsx);
