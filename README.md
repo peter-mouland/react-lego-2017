@@ -2,7 +2,7 @@
 
 ## To get started
 
- * clone the repo and switch to the `Scibsted` branch
+ * clone the repo and switch to the `Scibsted` branchc
  * `npm run build`
  * `npm run test:e2e`
  * `npm start`

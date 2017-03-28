@@ -94,6 +94,7 @@
     "nodemon": "^1.11.0",
     "pre-commit": "^1.1.2",
     "pre-push": "^0.1.1",
+    "preact-jsx-chai": "^2.2.1",
     "proxyquire": "^1.7.11",
     "react-addons-test-utils": "^15.1.0",
     "sass-lint": "^1.5.1",

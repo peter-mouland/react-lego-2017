@@ -14,7 +14,7 @@ export const rawRequest = ({ url, ...options }) => new Promise((resolve, reject)
   request.onerror = function (e) {
     reject(e);
   };
-  request.send();
+  request.send(options.data);
 });
 
 
@@ -42,7 +42,7 @@ const fetchUrl = (endpoint, opts = {}) => {
     .then(checkStatus)
     .then((response) => response.data)
     .catch((error) => {
-    console.log(error)
+      console.log(error);
       throw new Error(`request failed: ${error.message || error}`);
     });
 };
