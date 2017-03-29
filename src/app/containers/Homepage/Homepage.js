@@ -1,5 +1,5 @@
-import { h, Component } from 'preact';
-import { json } from '../../utils/fetch';
+import {h, Component} from 'preact';
+import {json} from '../../utils/fetch';
 
 import './styles.scss';
 
@@ -9,22 +9,29 @@ export default class Homepage extends Component {
     super(props);
     this.fetch = this.fetch.bind(this);
     this.state = {
-      response: false
+      response: null
     };
   }
 
   fetch(e) {
     e.preventDefault();
-    json.get(`/api/v1${this.apiInput.value}&responseType=${this.responseType.value}`)
-      .then((response) => {
-        const formatted = this.responseType.value === 'json'
-          ? JSON.stringify(JSON.parse(response), null, 2)
-          : response;
-        this.setState({ response: formatted });
+    const format = this.responseType.value;
+    if (this.state.response && this.state.response[format]){
+      return ;
+    }
+    json.get(`/api/v1${this.apiInput.value}&responseType=${format}`)
+      .then((data) => {
+        const formatted = format === 'json'
+          ? JSON.stringify(JSON.parse(data), null, 2)
+          : data;
+
+        const newState = Object.assign({}, this.state.response || {}, { [format]: formatted});
+
+        this.setState({ response: newState });
       });
   }
 
-  render({}, { response }) {
+  render({}, {response}) {
     return (
       <div id="homepage" className="section-container">
         <banner className="header">
@@ -49,7 +56,7 @@ export default class Homepage extends Component {
                    name="api"
                    id="api"
                    className="form__input"
-                   defaultValue="/advertisers/?format=api" />
+                   defaultValue="/advertisers/?format=api"/>
             <input type="submit"
                    value="fetch"
                    className="form__button"
@@ -59,14 +66,18 @@ export default class Homepage extends Component {
         </form>
         <section className="section results">
           <dl>
-            <dt className="section__label">HTTP</dt><dd></dd>
-            <dt className="section__label">Vary:</dt><dd className="section__value"></dd>
-            <dt className="section__label">Allow:</dt><dd className="section__value"></dd>
-            <dt className="section__label">Content-type:</dt><dd className="section__value"></dd>
+            <dt className="section__label">HTTP</dt>
+            <dd></dd>
+            <dt className="section__label">Vary:</dt>
+            <dd className="section__value"></dd>
+            <dt className="section__label">Allow:</dt>
+            <dd className="section__value"></dd>
+            <dt className="section__label">Content-type:</dt>
+            <dd className="section__value"></dd>
             <dt className="section__label sr-only">Response</dt>
-            {response ? (
+            {!!response ? (
               <dd className="results__value">
-                {response}
+                {response[this.responseType.value]}
               </dd>)
               : null
             }
